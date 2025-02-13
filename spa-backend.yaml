@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spa-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spa-backend
+  template:
+    metadata:
+      labels:
+        app: spa-backend
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: spa-backend-app
+          image: edupoli/smileapi:spa-backend-demo
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "256Mi"
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: FRONTEND_URL
+              value: "https://${FRONTEND_URL}"
+            - name: PUBLIC_API_URL
+              value: "https://${PUBLIC_API_URL}"
+            - name: REDIS_HOST
+              value: "redis-server-master-0.redis-server-headless.infra.svc.cluster.local"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: RABBITMQ_URI
+              value: 'amqp://admin:admin@rabbitmq-cluster.infra.svc.cluster.local:5672'
+            - name: RECAPTCHA_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: spa-backend-secrets
+                  key: RECAPTCHA_SECRET_KEY
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: spa-backend-secrets
+                  key: JWT_SECRET
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-service-secrets
+                  key: DATABASE_URL
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            timeoutSeconds: 2              
+          volumeMounts:
+            - mountPath: /data/sqlite
+              name: sqlite-storage
+      volumes:
+        - name: sqlite-storage
+          persistentVolumeClaim:
+            claimName: data-pvc
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spa-backend-svc
+spec:
+  selector:
+    app: spa-backend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
+
