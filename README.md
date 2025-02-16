@@ -75,8 +75,32 @@ Siga os passos abaixo para configurar e instalar a API:
    /bin/bash -c "$(curl -fsSL https://deploy.wappi.io)"
    ```
 
+Siga as Instruçoes do Shell Script:
+![image](https://github.com/user-attachments/assets/60b0863b-d237-4fb5-9d56-a955546acab1)
+
+Apos concluido o processo de deploy dos micro servicos a API estara disponivel para uso , acesse o Painel no dominio que configurou
+
+Para gerenciamento da API e monitoranto do cluster recomendamos o uso da ferramenta ***Lens Desktop****  
+Faca o download em https://k8slens.dev/download
+
+Apos baixar, instalar e criar uma conta voce deve adicionar a chave de acesso do cluster no Lens, esse arquivo foi gerado na instalacao da API com o nome ***kubeconfig.yaml***
+Acesse a VPS e copie esse arquivo para sua maquina local , existem diversas formas para se copiar esse arquivo da VPS para sua maquina , escolha a forma de sua preferencia
+como exemplo usando scp ou FTP etc....
+
+Uma vez copiado o arquivo no Lens clique com o botao direito do mouse em Local KubeConfigs e selecione o arquivo kubeconfig.yaml que baixou da VPS
+![image](https://github.com/user-attachments/assets/d3f755b9-bbe4-480b-b606-ef8c9783ecce)
+
+
+Agora vc tem acesso total ao cluster da API
+![image](https://github.com/user-attachments/assets/3da9c966-05f2-4b16-ab8f-fe1766c75d0d)
+
+Va ate PODs e acompanhe a criacao das instacias, monitore logs, veja consumo de memoria e CPU etc.....
+![image](https://github.com/user-attachments/assets/03fac0ba-bee0-418f-ae37-65bef5b88ad7)
+
 
 ## Suporte
 
-Para dúvidas ou suporte técnico, entre em contato através do email: suporte@wappi.io.
+Lembrando que essa instalacao tem o objetivo de demostracao da plataforma para que possa usar e conhecer, ***NAO SE TRATA DE UM PRODUTO OPENSOURCE***
+
+PARA CONTRATAR A API ENTRE EM CONTATO COMIGO NO WHATSAPP 43 996611437
 
