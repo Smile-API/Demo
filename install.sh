@@ -429,8 +429,10 @@ while [[ $ELAPSED -lt $TIMEOUT ]]; do
   ELAPSED=$((ELAPSED + SLEEP_INTERVAL))
 done
 
-gum style --foreground 1 "Falha no deploy do Postgres 😞..."
-exit 1
+if [[ $ELAPSED -ge $TIMEOUT ]]; then
+  gum style --foreground 1 "Falha no deploy do Postgres 😞..."
+  exit 1
+fi
 
 microk8s kubectl create secret generic spa-backend-secrets \
   --from-literal=RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY \
