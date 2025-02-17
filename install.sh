@@ -422,7 +422,6 @@ while [[ $ELAPSED -lt $TIMEOUT ]]; do
 
   if [[ $READY_PODS -ge 1 ]]; then
     gum style --foreground 2 "Postgres deployado com sucesso 🚀..."
-    exit 0
   fi
 
   sleep $SLEEP_INTERVAL
