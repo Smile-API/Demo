@@ -456,7 +456,7 @@ spec:
 EOF
 
 # deploy spa-backend
-curl -s '' >spa-backend.yaml
+curl -s https://raw.githubusercontent.com/Smile-API/Demo/refs/heads/main/spa-backend.yaml >spa-backend.yaml
 envsubst <spa-backend.yaml | microk8s kubectl apply -f -
 gum style --foreground 6 "Aguardando deploy do microservice spa-backend..."
 if gum spin --title "Isso pode levar alguns minutos" -- microk8s kubectl wait --for=condition=ready pod -l app=spa-backend --timeout=300s; then
@@ -467,7 +467,7 @@ fi
 rm spa-backend.yaml
 
 # deploy spa-frontend
-curl -s '' >spa-frontend.yaml
+curl -s https://raw.githubusercontent.com/Smile-API/Demo/refs/heads/main/spa-frontend.yaml >spa-frontend.yaml
 envsubst <spa-frontend.yaml | microk8s kubectl apply -f -
 gum style --foreground 6 "Aguardando deploy do microservice spa-frontend..."
 if gum spin --title "Isso pode levar alguns minutos" -- microk8s kubectl wait --for=condition=ready pod -l app=spa-frontend --timeout=300s; then
@@ -478,7 +478,7 @@ fi
 rm spa-frontend.yaml
 
 # deploy api-server
-curl -s '' >api-service.yaml
+curl -s https://raw.githubusercontent.com/Smile-API/Demo/refs/heads/main/api-service.yaml >api-service.yaml
 envsubst <api-service.yaml | microk8s kubectl apply -f -
 gum style --foreground 6 "Aguardando deploy do microservice api-service..."
 if gum spin --title "Isso pode levar alguns minutos" -- microk8s kubectl wait --for=condition=ready pod -l app=api-service --timeout=300s; then
