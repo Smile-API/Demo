@@ -60,13 +60,21 @@ spec:
               path: /health
               port: 3000
             initialDelaySeconds: 15
+            periodSeconds: 10
             timeoutSeconds: 2
           readinessProbe:
             httpGet:
               path: /health
               port: 3000
             initialDelaySeconds: 5
-            timeoutSeconds: 2              
+            periodSeconds: 10
+            timeoutSeconds: 2   
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10                         
           volumeMounts:
             - mountPath: /data/sqlite
               name: sqlite-storage
@@ -90,4 +98,3 @@ spec:
       port: 3000
       targetPort: 3000
   type: ClusterIP
-
