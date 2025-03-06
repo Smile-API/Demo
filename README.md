@@ -8,7 +8,7 @@ Esta API foi desenvolvida para fornecer uma solução escalável e de alta perfo
 A API é implementada em um ambiente Kubernetes, onde cada instância do serviço é executada de forma isolada em seu próprio POD. Esse modelo garante estabilidade e evita interferências entre instâncias.
 
 ### Baixo Consumo
-Cada instancia criada na API tem um consumo extremamente baixo entre 5Mb a 20Mb sendo possivel com isso ter centenas ou ate milhares de instancias ativas em uma unica VPS, e por usar clusterizda com kubernetes é ainda possivel adicionar mais VPS ao cluster se necessario.
+Cada instancia criada na API tem um consumo extremamente baixo entre 5Mb a 20Mb sendo possivel com isso ter centenas ou ate milhares de instancias ativas em uma unica VPS, e por ser clusterizda com kubernetes é ainda possivel adicionar mais VPS ao cluster se necessario.
 
 ### Alta Performance em Tempo Real
 Utilizamos tecnologia de WebSockets para comunicação instantânea e eficiente com o WhatsApp, proporcionando baixa latência e alta confiabilidade.
