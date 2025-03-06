@@ -18,7 +18,7 @@ spec:
         fsGroup: 0
       containers:
         - name: api-service-app
-          image: edupoli/smileapi:api-service-demo
+          image: edupoli/api-service:v1.0.0
           imagePullPolicy: Always
           resources:
             limits:
