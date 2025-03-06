@@ -1,5 +1,3 @@
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +12,10 @@ spec:
       labels:
         app: api-service
     spec:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
       containers:
         - name: api-service-app
           image: edupoli/smileapi:api-service-demo
@@ -62,6 +64,15 @@ spec:
               port: 3000
             initialDelaySeconds: 60
             timeoutSeconds: 2
+          volumeMounts:
+            - mountPath: /data
+              name: medias-storage
+      imagePullSecrets:
+        - name: api-service-registry
+      volumes:
+        - name: medias-storage
+          persistentVolumeClaim:
+            claimName: data-pvc
 
 ---
 apiVersion: v1
