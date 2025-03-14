@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: spa-backend-app
-          image: edupoli/spa-backend:v1.0.0
+          image: edupoli/spa-backend:v1.0.2
           imagePullPolicy: Always
           resources:
             limits:
