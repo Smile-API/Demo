@@ -18,7 +18,7 @@ spec:
         fsGroup: 0
       containers:
         - name: api-service-app
-          image: edupoli/api-service:v1.0.3
+          image: edupoli/api-service:v1.0.4
           imagePullPolicy: Always
           resources:
             limits:
